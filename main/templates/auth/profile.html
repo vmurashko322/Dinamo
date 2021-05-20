@@ -1,0 +1,12 @@
+{% extends 'movies_list.html' %}
+{% load static %}
+{% block johan %}
+<div class="user_menu">
+    <a href="">Добавить фильм</a>
+    <a href="{% url 'password_change' %}">Сменить пароль</a>
+    <a href="">Мои фильмы</a>
+    <a href="">Купить</a>
+    <a href="">F.U.Q.</a>
+    <a href="{% url 'user_update' %}">Изменить личные данные</a>
+</div>
+{% endblock %}

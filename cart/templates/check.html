@@ -1,0 +1,46 @@
+{% extends 'movies_base.html' %}
+{% block title %} Ваш заказ успешно сохранен {% endblock %}
+{% block movies %}
+    <div>
+        <p> Ваш заказ №{{ order.id }} будет доставлен по адресу {{ order.adress }} по указанному
+            времени: {{ order.delivery_date }}</p>
+        {% for item in cart %}
+            <div>
+                <img src="{{ item.product.images.url }}" alt="">
+                <p> {{ item.product.title }}</p>
+                <p>Количество: {{ item.quantity }}</p>
+                <p>Стоимость: {{ item.total_price }}</p>
+            </div>
+        {% endfor %}
+        <p>Итого: {{ cart.total_price }}</p>
+
+
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#    <div>#}
+{#        <h1>Спасибо за заказ!</h1>#}
+{#        <p>{{ order.name }} {{ order.surname }}</p>#}
+{#        <p>Email: {{ order.email }}</p>#}
+{#        <p>Адресс: {{ order.adress }}</p>#}
+{#        <p>Тел. {{ order.phone }}</p>#}
+{#        <p>Дата регистрации заказа: {{ order.order_date }}</p>#}
+{#        <p>Дата доставки: {{ order.delivery_date }}</p>#}
+{#    </div>#}

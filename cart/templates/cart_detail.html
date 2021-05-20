@@ -1,0 +1,47 @@
+{% extends 'movies_base.html' %}
+{% load static %}
+{% load my_tags %}
+{% block movies %}
+    <h3>Здравствуй</h3>
+    <div style="display: flex; width: 100%; justify-content: space-around; align-items: center; flex-direction: column">
+        {% for item in cart %}
+            <div style="display: flex; width: 100%; justify-content: space-around; align-items: center; border: 1px solid darkgreen; margin: 10px">
+                <img src="{{ item.product.images.url }}" alt="" style="width: 50px">
+                <p>{{ item.product.title }}</p>
+                <p>Цена за еденицу :{{ item.product.price }} р / {% multiple item.product.price currencies_usd.Cur_OfficialRate %}$ </p>
+                <p>Сумма:{% widthratio item.product.price 1 item.quantity %}</p>
+                <p>Количество:{{ item.quantity }}</p>
+                <form action="{% url 'cart:add_cart' item.product.id %}" method="post"
+                      style="display: flex; justify-content: center; align-items: center">>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type='submit' value="Изменить количество">
+                </form>
+                <a href="{% url 'cart:remove_item' item.product.id %}">
+                    <button style="text-decoration: none; color: #515873; font-weight: bold">X</button>
+                </a>
+
+            </div>
+        {% endfor %}
+    </div>
+    <div style="display: flex; justify-content: space-around">
+        <p style="color: yellow; font-weight: bold">Количество позиций: <span
+                style="color: crimson;border: 2px solid yellow;border-radius: 40%;padding: 2px;">{% firstof request.session.cart|length '0' %}</span>
+        </p>
+
+        <p style="color: yellow; font-weight: bold">Количество единиц: <span
+                style="color: crimson;border: 2px solid yellow;border-radius: 40%;padding: 2px;">{{ cart.total_quantity }}</span>
+        </p>
+
+        <p style="color: yellow; font-weight: bold">Стоимость: <strong
+                style="color: chocolate">{{ cart.total_price }}</strong></p>
+    </div>
+    <div>
+        <a href="{% url 'cart:order_form' %}">
+            <button>Оформить заказ</button>
+        </a>
+        {% block order %}
+        {% endblock %}
+    </div>
+
+{% endblock %}

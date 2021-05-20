@@ -1,0 +1,23 @@
+{% extends 'movies_base.html' %}
+{% load static %}
+{% block movies %}
+    {% load static %}
+    <h1>{{ movie.title }}</h1>
+    <div class="item_movie">
+        <a href="{{ movie.get_absolute_url }}">
+            <img src="
+
+
+
+                    {% if movie.images %}{{ movie.images.url }}{% else %}{% static 'img/no_img.png' %}{% endif %}"
+                 alt="Фото">
+        </a>
+        <a href="{{ movie.get_absolute_url }}">{{ movie.title }}</a>
+    </div>
+    <form action="{% url 'cart:add_cart' movie.id %}" method="post"
+          style="display: flex; justify-content: space-between; align-items: center;max-width: 300px">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <input type='submit' value="Добавить в корзину">
+    </form>
+{% endblock %}

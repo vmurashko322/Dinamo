@@ -1,0 +1,9 @@
+{% extends 'cart_detail.html' %}
+{% load static %}
+{% block order %}
+    <form action="{% url 'cart:order_form' %}" method="post">
+    {% csrf_token %}
+    {{ order_form.as_p }}
+        <a href=""><button>Подтвердить заказ</button></a>
+    </form>
+{% endblock %}

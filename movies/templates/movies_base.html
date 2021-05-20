@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <header class="header">
+        <div class="header_logo">
+            <a href=""><img src="{% static 'img/logo2.png' %}" alt="logo" id="'logo"></a>
+        </div>
+        <div class="header_social_media">
+            <a class="social_a" href=""><img class="social_img" src="{% static 'img/VK.png' %}" alt="VK"></a>
+            <a class="social_a" href=""><img class="social_img" src="{% static 'img/INST.png' %}" alt="INST"></a>
+            <a class="social_a" href=""><img class="social_img" src="{% static 'img/Tel.png' %}" alt="Tel"></a>
+            <p style="color: black;">{{ currencies_usd.Cur_OfficialRate }}</p>
+        </div>
+        <div>
+            <a class="social_a" href="{% url 'cart:cart_detail' %}" style="text-decoration: none;"><img
+                    class="social_img" src="{% static 'img/cart.png' %}" alt="Tel">
+                <span style="color: crimson;border: 2px solid yellow;border-radius: 40%;padding: 2px;">{% firstof request.session.cart|length '0' %}</span></a>
+
+        </div>
+        <div class="header_contact">
+            <p>+375 29 111 22 33</p>
+            <p>+375 29 555 66 77</p>
+            <p>+375 29 555 66 77</p>
+        </div>
+    </header>
+    <nav class="nav_bar">
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}" style="color: red">Выход</a>
+        {% else %}
+            <a href="{% url 'login' %}">Авторизация\Вход</a>
+            <a href="{% url 'register' %}">Регистрация</a>
+        {% endif %}
+    </nav>
+    {% block movies %}
+    {% endblock %}
+{% endblock %}
