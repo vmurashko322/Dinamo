@@ -55,4 +55,5 @@ class PersonModel(models.Model):
     avatar = models.ImageField(upload_to='avatar/%Y/%m/%d')
     performance = models.ForeignKey('PerformanceModel', on_delete=models.CASCADE)
 
-#123123
+
+
